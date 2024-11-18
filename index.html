@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RatSci Token | Live Research Stream</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        h1 {
+            font-size: 28px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        .title-glow {
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7),
+                         0 0 20px rgba(255, 255, 255, 0.5),
+                         0 0 30px rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00ffcc, #00ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .live-badge {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        .stream-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 255, 200, 0.2);
+            position: relative;
+        }
+
+        .stream-header {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+        }
+
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: #ff0000;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .live-text {
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+
+        video {
+            width: 100%;
+            display: block;
+        }
+
+        .viewer-count {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00ffcc, #00ccff);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ffcc;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            .stats { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="w-full flex justify-end p-4 fixed top-0 right-0 z-10">
+        <a href="https://pumpscience.gitbook.io/pump.science" 
+           target="_blank" 
+           class="font-fontBit text-white hover:text-opacity-80 transition-all duration-300 bg-black bg-opacity-50 px-4 py-2 rounded border border-white/10 hover:border-white/30 mr-4">
+            &lt;&lt; DOCS &gt;&gt;
+        </a>
+    </nav>
+    <div class="container">
+        <div class="hero">
+            <h1 class="title-glow">&lt;&lt; RATSCI TOKEN &gt;&gt;</h1>
+            <p class="subtitle">Live Research Stream: Aquatic Behavioral Analysis</p>
+            
+            <div class="stream-container">
+                <div class="stream-header">
+                    <div class="live-indicator"></div>
+                    <span class="live-text">Live</span>
+                </div>
+                <div class="viewer-count">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 4.5c-2.003 0-3.887.78-5.303 2.197a7.5 7.5 0 0 0 0 10.607A7.47 7.47 0 0 0 12 19.5a7.47 7.47 0 0 0 5.303-2.196 7.5 7.5 0 0 0 0-10.607A7.47 7.47 0 0 0 12 4.5Z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                    <span id="viewerCount">loading...</span>
+                </div>
+                <video id="streamVideo" autoplay muted loop playsinline>
+                    <source src="./assets/full_mice_loop.mp4" type="video/mp4">
+                </video>
+            </div>
+
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value">1,000,000,000</div>
+                    <div class="stat-label">Total Supply</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">SOL</div>
+                    <div class="stat-label">Network</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">3%</div>
+                    <div class="stat-label">Research Fund</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate synchronized playback
+        const video = document.getElementById('streamVideo');
+        const viewerCount = document.getElementById('viewerCount');
+        
+        // Function to get timestamp from server
+        async function getServerTime() {
+            try {
+                const response = await fetch('https://worldtimeapi.org/api/ip');
+                const data = await response.json();
+                return data.unixtime;
+            } catch (error) {
+                return Math.floor(Date.now() / 1000);
+            }
+        }
+
+        // Initialize video playback
+        async function initializeStream() {
+            const serverTime = await getServerTime();
+            const videoDuration = 500; // Set this to your actual video duration in seconds
+            const startPosition = (serverTime % videoDuration);
+            
+            video.currentTime = startPosition;
+            video.play();
+        }
+
+        // Simulate fluctuating viewer count
+        function updateViewerCount() {
+            const baseCount = 1500;
+            const randomFluctuation = Math.floor(Math.random() * 50) - 25;
+            viewerCount.textContent = `${baseCount + randomFluctuation} watching`;
+        }
+
+        // Initialize
+        initializeStream();
+        updateViewerCount();
+        setInterval(updateViewerCount, 5000);
+
+        // Wallet connection
+        document.querySelector('.cta-button').addEventListener('click', async () => {
+            if (window.solana && window.solana.isPhantom) {
+                try {
+                    await window.solana.connect();
+                    console.log('Phantom wallet connected');
+                } catch (err) {
+                    console.error('Failed to connect to Phantom wallet:', err);
+                }
+            } else {
+                window.open('https://phantom.app/', '_blank');
+            }
+        });
+    </script>
+</body>
+</html>
