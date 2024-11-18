@@ -150,6 +150,22 @@
             transform: scale(1.05);
         }
 
+        .viewer-count {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 0.5rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 20;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    }
+
         .stats {
             display: flex;
             justify-content: center;
@@ -274,7 +290,7 @@
                     <div class="live-indicator"></div>
                     <span class="live-text">LIVE</span>
                 </div>
-                <div class="viewer-count">
+                <div class="viewer-count" style="z-index: 20;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 4.5c-2.003 0-3.887.78-5.303 2.197a7.5 7.5 0 0 0 0 10.607A7.47 7.47 0 0 0 12 19.5a7.47 7.47 0 0 0 5.303-2.196 7.5 7.5 0 0 0 0-10.607A7.47 7.47 0 0 0 12 4.5Z"/>
                         <circle cx="12" cy="12" r="3"/>
@@ -334,43 +350,46 @@
 
     <script>
         // Simulate synchronized playback
-        const video = document.getElementById('streamVideo');
         const viewerCount = document.getElementById('viewerCount');
+    
+    // Set an initial base count that persists across page loads
+    const getInitialCount = () => {
+        // Get stored count or set default
+        let storedCount = localStorage.getItem('baseViewerCount');
+        if (!storedCount) {
+            storedCount = 1500 + Math.floor(Math.random() * 100);
+            localStorage.setItem('baseViewerCount', storedCount);
+        }
+        return parseInt(storedCount);
+    };
+
+    // Initialize base count
+    const baseCount = getInitialCount();
+    
+    // Function to simulate organic viewer fluctuation
+    function updateViewerCount() {
+        // Create natural-looking fluctuations
+        const time = Date.now() / 1000; // Current time in seconds
+        const sinWave = Math.sin(time / 10) * 15; // Smooth wave pattern
+        const smallRandom = Math.floor(Math.random() * 10) - 5; // Small random adjustment
         
-        // Function to get timestamp from server
-        async function getServerTime() {
-            try {
-                const response = await fetch('https://worldtimeapi.org/api/ip');
-                const data = await response.json();
-                return data.unixtime;
-            } catch (error) {
-                return Math.floor(Date.now() / 1000);
-            }
-        }
+        // Combine base count with fluctuations
+        const currentCount = baseCount + Math.floor(sinWave + smallRandom);
+        
+        // Update display with formatted number
+        viewerCount.textContent = `${currentCount.toLocaleString()} watching`;
+    }
 
-        // Initialize video playback
-        async function initializeStream() {
-            const serverTime = await getServerTime();
-            const videoDuration = 500; // Set this to your actual video duration in seconds
-            const startPosition = (serverTime % videoDuration);
-            
-            video.currentTime = startPosition;
-            video.play();
-        }
+    // Update immediately and then every 2 seconds
+    updateViewerCount();
+    setInterval(updateViewerCount, 2000);
 
-        // Simulate fluctuating viewer count
-        function updateViewerCount() {
-            const baseCount = 1500;
-            const randomFluctuation = Math.floor(Math.random() * 50) - 25;
-            viewerCount.textContent = `${baseCount + randomFluctuation} watching`;
-        }
-
-        // Initialize
-        initializeStream();
-        updateViewerCount();
-        setInterval(updateViewerCount, 5000);
-
-        // Wallet connection
+    // Optional: Periodically adjust base count for longer sessions
+    setInterval(() => {
+        const adjustment = Math.floor(Math.random() * 21) - 10; // -10 to +10
+        const newBase = baseCount + adjustment;
+        localStorage.setItem('baseViewerCount', newBase);
+    }, 300000); // Every 5 minutes
        
     </script>
 </body>
