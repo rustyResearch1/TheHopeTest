@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RatSci Token | Live Research Stream</title>
+    <title>Hope Experiment | The Porsolt Test</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/4.5.0/web3.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
@@ -205,6 +205,53 @@
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
         }
+        .experiment-info {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px rgba(0, 255, 200, 0.1);
+}
+
+.experiment-title {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #00ffcc;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+.experiment-details {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.detail-item {
+    border-left: 2px solid #00ffcc;
+    padding-left: 1rem;
+}
+
+.detail-item h3 {
+    font-size: 0.8rem;
+    color: #00ffcc;
+    margin-bottom: 0.5rem;
+}
+
+.detail-item p {
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: #fff;
+}
+
+@media (max-width: 768px) {
+    .experiment-info {
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
     </style>
 </head>
 <body>
@@ -240,6 +287,28 @@
                         allowfullscreen="true"
                         loading="lazy"
                     ></iframe>
+                </div>
+            </div>
+
+            <div class="experiment-info">
+                <h2 class="experiment-title">Current Stage: Stage 1: Control Experiment</h2>
+                <div class="experiment-details">
+                    <div class="detail-item">
+                        <h3>Objective:</h3>
+                        <p>Establish baseline behavior using a control solution.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Current Injected Substance:</h3>
+                        <p>Saline (control)</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Data Collection:</h3>
+                        <p>Publish protocols, video recordings, and raw data on-chain for community review. Each mouse is equipped with a waterproof chip on its back that provides real-time data on biological factors such as heart rate, stress, and other physiological metrics, enabling precise monitoring throughout the experiment.</p>
+                    </div>
+                    <div class="detail-item">
+                        <h3>Outcome:</h3>
+                        <p>Provide benchmark data to compare the effects of experimental compounds of the porsolt test.</p>
+                    </div>
                 </div>
             </div>
 
@@ -300,18 +369,7 @@
         setInterval(updateViewerCount, 5000);
 
         // Wallet connection
-        document.querySelector('.cta-button').addEventListener('click', async () => {
-            if (window.solana && window.solana.isPhantom) {
-                try {
-                    await window.solana.connect();
-                    console.log('Phantom wallet connected');
-                } catch (err) {
-                    console.error('Failed to connect to Phantom wallet:', err);
-                }
-            } else {
-                window.open('https://phantom.app/', '_blank');
-            }
-        });
+       
     </script>
 </body>
 </html>
