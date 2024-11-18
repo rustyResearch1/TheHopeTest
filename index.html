@@ -177,19 +177,47 @@
             h1 { font-size: 2.5rem; }
             .stats { flex-direction: column; gap: 1rem; }
         }
+
+        .docs-nav {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 10;
+        }
+
+        .docs-button {
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .docs-button:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
-    <nav class="w-full flex justify-end p-4 fixed top-0 right-0 z-10">
+    <nav class="docs-nav">
         <a href="https://the-hope-experiment.gitbook.io/the-hope-experiment" 
            target="_blank" 
-           class="font-fontBit text-white hover:text-opacity-80 transition-all duration-300 bg-black bg-opacity-50 px-4 py-2 rounded border border-white/10 hover:border-white/30 mr-4">
-            &lt;&lt; DOCS &gt;&gt;
-        </a>
+           class="docs-button">
+           &lt;&lt; DOCS &gt;&gt;
+       </a>
     </nav>
     <div class="container">
         <div class="hero">
-            <h1 class="title-glow">&lt;&lt; The Hope Test &gt;&gt;</h1>
+            <h1 class="title-glow">&lt;&lt; THE HOPE TEST &gt;&gt;</h1>
             <p class="subtitle">Live Research Stream: Aquatic Behavioral Analysis</p>
             
             <div class="stream-container">
